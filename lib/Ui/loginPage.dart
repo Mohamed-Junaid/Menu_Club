@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           fillColor: Color(0xffff3333),
                           hintText: "Username",
                           hintStyle: GoogleFonts.poppins(
-                            textStyle:TextStyle(
+                            textStyle:GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w500,        ),),
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding:  EdgeInsets.only(left: 41.w),
                             child: Text(
                                 "Login",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,color: Color(0xffFF0000)
                                 )

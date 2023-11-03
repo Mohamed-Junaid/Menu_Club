@@ -78,7 +78,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
                             children: [
                               Text(
                                   "+",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w600,color: Color(0xffFF3C3C)
 
@@ -86,7 +86,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
                               ),SizedBox(width: 3.w,),
                               Text(
                                   "Add New",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 13.sp,
                                       fontWeight: FontWeight.w600,color: Color(0xffFF3C3C)
                                   )

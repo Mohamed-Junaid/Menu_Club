@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^5.1.0
   shimmer: ^3.0.0
   dropdown_below: ^1.0.3
+  dotted_line: ^3.2.2
 
 dev_dependencies:
   flutter_test:

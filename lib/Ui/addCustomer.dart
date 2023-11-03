@@ -20,7 +20,7 @@ class _AddCustomerState extends State<AddCustomer> {
           padding: EdgeInsets.only(left: 22.w, top: 10.h),
           child: Text(
             "Add New customer",
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 20.sp,
               fontWeight: FontWeight.w600,
               color: Colors.white,

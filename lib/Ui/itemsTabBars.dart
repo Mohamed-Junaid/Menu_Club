@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:menu_club/Ui/confirmOrder.dart';
 import 'package:menu_club/Ui/items_Tabbars/arabic.dart';
 import 'package:menu_club/Ui/items_Tabbars/beverages.dart';
 import 'package:menu_club/Ui/items_Tabbars/breads.dart';
@@ -45,7 +46,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars> {
               padding: EdgeInsets.only(left: 22.w, top: 10.h),
               child: Text(
                 "Items",
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -115,7 +116,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 8.w,right: 8.w),
                   child: Container(
-                    height: 500.h,
+                    height: 510.h,
                     child: TabBarView(
                       children: [
                         Breads(),Chicken(),Chinese(),Beverages(),Arabic(),Indian(),Labanese()
@@ -138,35 +139,40 @@ class _ItemsTabBarsState extends State<ItemsTabBars> {
                     child: Center(
                       child: Text(
                           "ordered",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w500,color: Colors.white
                           )
                       ),
                     ),
                   ),SizedBox(width: 54.w,),
-                  Container(
-                    decoration: BoxDecoration(
-                        boxShadow: kElevationToShadow[4],
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white),
-                    width: 145.w,
-                    height: 41.h,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 41.w,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ConfirmOrder()));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          boxShadow: kElevationToShadow[4],
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white),
+                      width: 145.w,
+                      height: 41.h,
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 32.w,
+                            ),
+                            child: Text("Continue",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xffFF0000))),
                           ),
-                          child: Text("Continue",
-                              style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xffFF0000))),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
 
+                    ),
                   ),
                 ],
               ),

@@ -291,19 +291,12 @@ class _SelectCustomerState extends State<SelectCustomer> {
                           color: Colors.white),
                       width: 145.w,
                       height: 41.h,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 41.w,
-                            ),
-                            child: Text("Continue",
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xffFF0000))),
-                          ),
-                        ],
+                      child: Center(
+                        child: Text("Continue",
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffFF0000))),
                       ),
 
                     ),

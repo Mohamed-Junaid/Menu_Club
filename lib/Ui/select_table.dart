@@ -213,52 +213,58 @@ class _SelectTableState extends State<SelectTable> {
                                                           if(isExpanded)
                                                             Column(
                                                               children: [
-                                                                Container(height:85.h,
-                                                                  child: ListView(
-                                                                    shrinkWrap: true,
-                                                                    physics: AlwaysScrollableScrollPhysics(),
-                                                                    children: opt.map((e) =>
-                                                                        Padding(
-                                                                          padding: EdgeInsets.only(left: 135.w,top: 5.h),
-                                                                          child: InkWell(
-                                                                            onTap: (){
-                                                                              isExpanded = false ;
-                                                                              selectOption = e ;
-                                                                              setState(() {
+                                                                Padding(
+                                                                  padding:  EdgeInsets.only(
+                                                                      left: 62.w),
+                                                                  child: Container(height:85.h,width:222.w,
+                                                                    child: ListView(
+                                                                      shrinkWrap: true,
+                                                                      physics: AlwaysScrollableScrollPhysics(),
+                                                                      children: opt.map((e) =>
+                                                                          Padding(
+                                                                            padding: EdgeInsets.only(top: 5.h),
+                                                                            child: InkWell(
+                                                                              onTap: (){
+                                                                                isExpanded = false ;
+                                                                                selectOption = e ;
+                                                                                setState(() {
 
-                                                                              });
-                                                                            },
-                                                                            child:
-                                                                            Container(
+                                                                                });
+                                                                              },
                                                                               child:
-                                                                              InkWell(
-                                                                                onTap: () {
-                                                                                  isExpanded =
-                                                                                  false;
-                                                                                  selectOption =
-                                                                                      e;
-                                                                                  setState(
-                                                                                          () {});
-                                                                                },
-                                                                                child: Text(
-                                                                                  e,
-                                                                                  style:
-                                                                                  GoogleFonts.poppins(
-                                                                                    height:
-                                                                                    2,
-                                                                                    fontSize:
-                                                                                    18.sp,
-                                                                                    fontWeight:
-                                                                                    FontWeight.w400,
-                                                                                    color: Color(
-                                                                                        0xff848484),
+                                                                              Container(
+                                                                                child:
+                                                                                InkWell(
+                                                                                  onTap: () {
+                                                                                    isExpanded =
+                                                                                    false;
+                                                                                    selectOption =
+                                                                                        e;
+                                                                                    setState(
+                                                                                            () {});
+                                                                                  },
+                                                                                  child: Center(
+                                                                                    child: Text(
+                                                                                      e,
+                                                                                      style:
+                                                                                      GoogleFonts.poppins(
+                                                                                        height:
+                                                                                        2,
+                                                                                        fontSize:
+                                                                                        18.sp,
+                                                                                        fontWeight:
+                                                                                        FontWeight.w400,
+                                                                                        color: Color(
+                                                                                            0xff848484),
+                                                                                      ),
+                                                                                    ),
                                                                                   ),
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ),
-                                                                        ))
-                                                                        .toList(),
+                                                                          ))
+                                                                          .toList(),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],
@@ -359,19 +365,12 @@ class _SelectTableState extends State<SelectTable> {
               child: Container(
                   width: 145.w,
                   height: 41.h,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 41.w,
-                        ),
-                        child: Text("Continue",
-                            style: GoogleFonts.poppins(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xffFF0000))),
-                      ),
-                    ],
+                  child: Center(
+                    child: Text("Continue",
+                        style: GoogleFonts.poppins(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xffFF0000))),
                   ),
                   decoration: BoxDecoration(
                     boxShadow: kElevationToShadow[4],

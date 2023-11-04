@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:menu_club/Ui/select_table.dart';
 
 import 'editOrder.dart';
 class ConfirmOrder extends StatefulWidget {
@@ -283,8 +284,8 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
               child: Center(
                 child: Text(
                     "Edit Order",
-                    style: TextStyle(
-                        fontSize: 20.sp,
+                    style: GoogleFonts.poppins(
+                        fontSize: 18.999.sp,
                         fontWeight: FontWeight.w500,color: Colors.white
                     )
                 ),
@@ -293,7 +294,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
           ),SizedBox(width: 54.w,),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ConfirmOrder()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> SelectTable()));
             },
             child: Container(
               decoration: BoxDecoration(
@@ -302,19 +303,12 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
                   color: Colors.white),
               width: 142.w,
               height: 41.h,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 41.w,
-                    ),
-                    child: Text("confirm",
-                        style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xffFF0000))),
-                  ),
-                ],
+              child: Center(
+                child: Text("confirm",
+                    style: GoogleFonts.poppins(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xffFF0000))),
               ),
 
             ),

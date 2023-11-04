@@ -15,6 +15,7 @@ class _SelectTableState extends State<SelectTable> {
   String selectOption = 'Status';
   List<String> opt = ['Free', 'Preparing', 'Eating', 'Finished'];
   bool isExpanded = false;
+  bool isSelected = false;
 
 
   @override
@@ -137,158 +138,140 @@ class _SelectTableState extends State<SelectTable> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 62.w, top: 10.h),
-                                                      child: Container(
-                                                        width: 222.w,
-                                                        height: 43.h,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                          color:
-                                                              Color(0xffff3333),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: 68.w),
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              FocusScope.of(
+                                                    Container(height: 175.h,width: double.infinity,
+                                                      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Padding(
+                                                            padding: EdgeInsets.only(
+                                                                left: 62.w, top: 15.h),
+                                                            child: Container(
+                                                              width: 222.w,
+                                                              height: 43.h,
+                                                              decoration: BoxDecoration(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(5),
+                                                                color:
+                                                                Color(0xffff3333),
+                                                              ),
+                                                              child: InkWell(
+                                                                onTap: () {
+                                                                  FocusScope.of(
                                                                       context)
-                                                                  .unfocus();
-                                                              isExpanded =
+                                                                      .unfocus();
+                                                                  isExpanded  =
                                                                   !isExpanded;
-                                                              setState(() {});
-                                                            },
-                                                            child: Row(
-                                                              children: [
-                                                                Text(
-                                                                  ('Status'),
-                                                                  style:
-                                                                  GoogleFonts.poppins(
-                                                                    fontSize:
-                                                                        18.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ),
-                                                                ),
-                                                                Text(
-                                                                    ':${selectOption}',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style:
-                                                                    GoogleFonts.poppins(
-                                                                      fontSize:
+                                                                  setState(() {});
+                                                                },
+                                                                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Center(
+                                                                      child: Text(textAlign: TextAlign.center,
+                                                                        ('Status'),
+                                                                        style:
+                                                                        GoogleFonts.poppins(
+                                                                          fontSize:
                                                                           18.sp,
-                                                                      fontWeight:
+                                                                          fontWeight:
                                                                           FontWeight
                                                                               .w500,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    )),
-                                                                SizedBox(
-                                                                  width: 6.w,
-                                                                ),
-                                                                Container(
-                                                                  height: 15.h,
-                                                                  width: 15.w,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                    border: Border.all(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        width:
-                                                                            1.w),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      isExpanded
-                                                                          ? Icons
-                                                                              .keyboard_arrow_down
-                                                                          : Icons
-                                                                              .arrow_forward_ios_rounded,
-                                                                      color: Colors
-                                                                          .white,
-                                                                      size: 8.sp,
+                                                                          color: Colors
+                                                                              .white,
+                                                                        ),
+                                                                      ),
                                                                     ),
-                                                                  ),
+                                                                    SizedBox(width: 1.w,),
+
+                                                                    Text(
+                                                                        ' : ${selectOption}',
+                                                                        textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                        style:
+                                                                        GoogleFonts.poppins(
+                                                                          fontSize:
+                                                                          18.sp,
+                                                                          fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                          color: Colors
+                                                                              .white,
+                                                                        )),
+                                                                    SizedBox(
+                                                                      width: 6.w,
+                                                                    ),
+                                                                    isExpanded
+                                                                        ? Image.asset('assets/Group 29.png',width: 13.w,height: 13.h,)
+                                                                        : Image.asset('assets/Group 28.png',width: 13.w,height: 13.h,)
+                                                                  ],
                                                                 ),
-                                                              ],
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    if(isExpanded==false)
-                                              SizedBox(height:117.h,),
-                                              if(isExpanded)
-                                                      Column(
-                                                        children: [
-                                                          Container(height:80.h,
-                                                            child: ListView(
-                                                              shrinkWrap: true,
-                                                              physics: AlwaysScrollableScrollPhysics(),
-                                                              children: opt.map((e) =>
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(left: 135.w,top: 5.h),
-                                                                    child: InkWell(
-                                                                      onTap: (){
-                                                                        isExpanded = false ;
-                                                                        selectOption = e ;
-                                                                        setState(() {
+                                                          if(isExpanded==false)
+                                                            SizedBox(height:117.h,),
+                                                          if(isExpanded)
+                                                            Column(
+                                                              children: [
+                                                                Container(height:85.h,
+                                                                  child: ListView(
+                                                                    shrinkWrap: true,
+                                                                    physics: AlwaysScrollableScrollPhysics(),
+                                                                    children: opt.map((e) =>
+                                                                        Padding(
+                                                                          padding: EdgeInsets.only(left: 135.w,top: 5.h),
+                                                                          child: InkWell(
+                                                                            onTap: (){
+                                                                              isExpanded = false ;
+                                                                              selectOption = e ;
+                                                                              setState(() {
 
-                                                                        });
-                                                                      },
-                                                                      child:
-                                                                      Container(
+                                                                              });
+                                                                            },
                                                                             child:
-                                                                                InkWell(
-                                                                              onTap: () {
-                                                                                isExpanded =
-                                                                                    false;
-                                                                                selectOption =
-                                                                                    e;
-                                                                                setState(
-                                                                                    () {});
-                                                                              },
-                                                                              child: Text(
-                                                                                e,
-                                                                                style:
-                                                                                GoogleFonts.poppins(
-                                                                                  height:
-                                                                                      2,
-                                                                                  fontSize:
-                                                                                      18.sp,
-                                                                                  fontWeight:
-                                                                                      FontWeight.w400,
-                                                                                  color: Color(
-                                                                                      0xff848484),
+                                                                            Container(
+                                                                              child:
+                                                                              InkWell(
+                                                                                onTap: () {
+                                                                                  isExpanded =
+                                                                                  false;
+                                                                                  selectOption =
+                                                                                      e;
+                                                                                  setState(
+                                                                                          () {});
+                                                                                },
+                                                                                child: Text(
+                                                                                  e,
+                                                                                  style:
+                                                                                  GoogleFonts.poppins(
+                                                                                    height:
+                                                                                    2,
+                                                                                    fontSize:
+                                                                                    18.sp,
+                                                                                    fontWeight:
+                                                                                    FontWeight.w400,
+                                                                                    color: Color(
+                                                                                        0xff848484),
+                                                                                  ),
                                                                                 ),
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                        ),
-                                                                  ))
-                                                                  .toList(),
+                                                                        ))
+                                                                        .toList(),
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
-                                                          ),
+
                                                         ],
                                                       ),
+                                                    ),
 
-                                                    if(isExpanded)
-                                                      SizedBox(height: 45.h,),
+
                                                     Padding(
                                                       padding: EdgeInsets.only(
-                                                        left: 101.w,bottom: 55.h
+                                                        left: 101.w,bottom: 50.h
                                                       ),
                                                       child: Container(
                                                         width: 145.w,
@@ -337,7 +320,7 @@ class _SelectTableState extends State<SelectTable> {
                                         children: [
                                           Text(
                                             "Status",
-                                            style: TextStyle(
+                                            style: GoogleFonts.poppins(
                                               fontSize: 18.sp,
                                               fontWeight: FontWeight.w500,
                                               color: Colors.white,
@@ -383,7 +366,7 @@ class _SelectTableState extends State<SelectTable> {
                           left: 41.w,
                         ),
                         child: Text("Continue",
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xffFF0000))),

@@ -182,18 +182,15 @@ class _SelectCustomerState extends State<SelectCustomer> {
                                       children: [
                                         Expanded(
                                           child: Center(
-                                            child: Row(
+                                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 Center(
-                                                  child: Padding(
-                                                    padding: EdgeInsets.only(left: 74.w),
-                                                    child: Text(
-                                                      title,
-                                                      style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: Color(0xffff3333),
-                                                      ),
+                                                  child: Text(
+                                                    title,
+                                                    style: TextStyle(
+                                                      fontSize: 20.sp,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Color(0xffff3333),
                                                     ),
                                                   ),
                                                 ),

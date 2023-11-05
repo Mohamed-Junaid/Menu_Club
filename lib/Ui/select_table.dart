@@ -17,7 +17,7 @@ class _SelectTableState extends State<SelectTable> {
   bool isExpanded = false;
   bool isSelected = false;
 
-
+dynamic groupValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,7 +167,7 @@ class _SelectTableState extends State<SelectTable> {
                                                                   children: [
                                                                     Center(
                                                                       child: Text(textAlign: TextAlign.center,
-                                                                        ('Status'),
+                                                                        selectOption,
                                                                         style:
                                                                         GoogleFonts.poppins(
                                                                           fontSize:
@@ -182,21 +182,6 @@ class _SelectTableState extends State<SelectTable> {
                                                                     ),
                                                                     SizedBox(width: 1.w,),
 
-                                                                    Text(
-                                                                        ' : ${selectOption}',
-                                                                        textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                        style:
-                                                                        GoogleFonts.poppins(
-                                                                          fontSize:
-                                                                          18.sp,
-                                                                          fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                          color: Colors
-                                                                              .white,
-                                                                        )),
                                                                     SizedBox(
                                                                       width: 6.w,
                                                                     ),
@@ -217,53 +202,28 @@ class _SelectTableState extends State<SelectTable> {
                                                                   padding:  EdgeInsets.only(
                                                                       left: 62.w),
                                                                   child: Container(height:85.h,width:222.w,
-                                                                    child: ListView(
-                                                                      shrinkWrap: true,
-                                                                      physics: AlwaysScrollableScrollPhysics(),
-                                                                      children: opt.map((e) =>
-                                                                          Padding(
-                                                                            padding: EdgeInsets.only(top: 5.h),
-                                                                            child: InkWell(
-                                                                              onTap: (){
-                                                                                isExpanded = false ;
-                                                                                selectOption = e ;
-                                                                                setState(() {
-
-                                                                                });
-                                                                              },
-                                                                              child:
-                                                                              Container(
-                                                                                child:
-                                                                                InkWell(
-                                                                                  onTap: () {
-                                                                                    isExpanded =
-                                                                                    false;
-                                                                                    selectOption =
-                                                                                        e;
-                                                                                    setState(
-                                                                                            () {});
-                                                                                  },
-                                                                                  child: Center(
-                                                                                    child: Text(
-                                                                                      e,
-                                                                                      style:
-                                                                                      GoogleFonts.poppins(
-                                                                                        height:
-                                                                                        2,
-                                                                                        fontSize:
-                                                                                        18.sp,
-                                                                                        fontWeight:
-                                                                                        FontWeight.w400,
-                                                                                        color: Color(
-                                                                                            0xff848484),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ))
-                                                                          .toList(),
+                                                                    child: ListView.builder(
+                                                                        // padding: EdgeInsets.only(top: 18.h),
+                                                                        itemExtent: 40.h,
+                                                                        shrinkWrap: true,
+                                                                        itemCount: opt.length,
+                                                                        itemBuilder: (context, index) {
+                                                                          return ListTile(
+                                                                            title: Center(child: Text(
+                                                                                opt.elementAt(index),
+                                                                                style:GoogleFonts.poppins(
+                                                                              textStyle: TextStyle(
+                                                                                color: Color(0xff606060),fontSize: 16.sp,
+                                                                                fontWeight: FontWeight.w400,
+                                                                              ),))),
+                                                                            onTap: () {
+                                                                              setState(() {
+                                                                                groupValue = index;
+                                                                                selectOption =  ' Status : ${opt.elementAt(index)}';
+                                                                              });
+                                                                            },
+                                                                          );
+                                                                        }
                                                                     ),
                                                                   ),
                                                                 ),

@@ -60,7 +60,7 @@ class _BreadsState extends State<Breads> {
                                 child: Container(
                                     width: 222.w,
                                     height: 384.h,
-                                  decoration: BoxDecoration(
+                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                       topRight:
                                       Radius.circular(50.r),
@@ -69,177 +69,179 @@ class _BreadsState extends State<Breads> {
                                     ),
                                     color:Color(0xffff3333),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 20.w,top: 40.h),
-                                        child: Text(
-                                          "Enter The Quantity",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 20.sp,
-                                            fontWeight:
-                                            FontWeight.w500,
-                                            color: Colors.white
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 20.w,top: 40.h),
+                                          child: Text(
+                                            "Enter The Quantity",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 20.sp,
+                                              fontWeight:
+                                              FontWeight.w500,
+                                              color: Colors.white
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 47.w, top: 20.h),
-                                        child: Row(
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                FocusScope.of(context).unfocus();
-                                                setState(() {
-                                                  selectedContainer = "Q";
-                                                });
-                                              },
-                                              child: Container(
-                                                width: 40.w,
-                                                height: 40.h,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  color: selectedContainer == "Q"
-                                                      ? Colors.black
-                                                      : Colors.white,
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "Q",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 24.sp,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: Color(0xffff3333),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 57.w,),
-                                            InkWell(
-                                              onTap: () {
-                                                FocusScope.of(context).unfocus();
-                                                setState(() {
-                                                  selectedContainer = "H";
-                                                });
-                                              },
-                                              child: Container(
-                                                width: 40.w,
-                                                height: 40.h,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  color: selectedContainer == "H"
-                                                      ? Colors.black
-                                                      : Colors.white,
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "H",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 24.sp,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: Color(0xffff3333),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 57.w,),
-                                            InkWell(
-                                              onTap: () {
-                                                FocusScope.of(context).unfocus();
-                                                setState(() {
-                                                  selectedContainer = "F";
-                                                });
-                                              },
-                                              child: Container(
-                                                width: 40.w,
-                                                height: 40.h,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(5),
-                                                  color: selectedContainer == "F"
-                                                      ? Colors.black
-                                                      : Colors.white,
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "F",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 24.sp,
-                                                      fontWeight: FontWeight.w600,
-                                                      color: Color(0xffff3333),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 28.h,left: 38.w),
-                                        child: Container(
-                                          width: 257.w,
-                                          height: 45.h,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(color: Colors.white),
-                                            borderRadius: BorderRadius.circular(10.r),
-                                          ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 47.w, top: 20.h),
                                           child: Row(
                                             children: [
-                                              SizedBox(width: 9.w),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(left: 29.w,bottom: 13.h),
-                                                  child: TextFormField(
-                                                    textInputAction: TextInputAction.next,
-                                                    style: TextStyle(color: Colors.white),
-                                                    decoration: InputDecoration(
-                                                      contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                                                      border: InputBorder.none, // Remove the border
-                                                      fillColor: Color(0xffff3333),
-                                                      hintText: "Enter The Quantity ", // Add placeholder text
-                                                      hintStyle: GoogleFonts.poppins(
-                                                        textStyle: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.sp,
-                                                          fontWeight: FontWeight.w500,
-                                                        ),
+                                              InkWell(
+                                                onTap: () {
+                                                  FocusScope.of(context).unfocus();
+                                                  setState(() {
+                                                    selectedContainer = "Q";
+                                                  });
+                                                },
+                                                child: Container(
+                                                  width: 40.w,
+                                                  height: 40.h,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    color: selectedContainer == "Q"
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "Q",
+                                                      style: GoogleFonts.poppins(
+                                                        fontSize: 24.sp,
+                                                        fontWeight: FontWeight.w600,
+                                                        color: Color(0xffff3333),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(width: 57.w,),
+                                              InkWell(
+                                                onTap: () {
+                                                  FocusScope.of(context).unfocus();
+                                                  setState(() {
+                                                    selectedContainer = "H";
+                                                  });
+                                                },
+                                                child: Container(
+                                                  width: 40.w,
+                                                  height: 40.h,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    color: selectedContainer == "H"
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "H",
+                                                      style: GoogleFonts.poppins(
+                                                        fontSize: 24.sp,
+                                                        fontWeight: FontWeight.w600,
+                                                        color: Color(0xffff3333),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(width: 57.w,),
+                                              InkWell(
+                                                onTap: () {
+                                                  FocusScope.of(context).unfocus();
+                                                  setState(() {
+                                                    selectedContainer = "F";
+                                                  });
+                                                },
+                                                child: Container(
+                                                  width: 40.w,
+                                                  height: 40.h,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    color: selectedContainer == "F"
+                                                        ? Colors.black
+                                                        : Colors.white,
+                                                  ),
+                                                  child: Center(
+                                                    child: Text(
+                                                      "F",
+                                                      style: GoogleFonts.poppins(
+                                                        fontSize: 24.sp,
+                                                        fontWeight: FontWeight.w600,
+                                                        color: Color(0xffff3333),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ],
-                                          ),
+                                          )
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 94.w,top: 63.h),
-                                        child: Container(
-                                            width: 145.w,
-                                            height: 41.h,
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 28.h,left: 38.w),
+                                          child: Container(
+                                            width: 257.w,
+                                            height: 45.h,
                                             decoration: BoxDecoration(
-                                              boxShadow: kElevationToShadow[4],
-                                                borderRadius: BorderRadius.circular(10),
-                                                color: Colors.white),
-                                          child:Center(
-                                            child: Text(
-                                              "ok",
-                                              style:GoogleFonts.poppins (
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color:Color(0xffff3333),
-                                              ),
+                                              border: Border.all(color: Colors.white),
+                                              borderRadius: BorderRadius.circular(10.r),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(width: 9.w),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(left: 29.w,bottom: 13.h),
+                                                    child: TextFormField(
+                                                      textInputAction: TextInputAction.next,
+                                                      style: TextStyle(color: Colors.white),
+                                                      decoration: InputDecoration(
+                                                        contentPadding: EdgeInsets.symmetric(vertical: 10.0),
+                                                        border: InputBorder.none, // Remove the border
+                                                        fillColor: Color(0xffff3333),
+                                                        hintText: "Enter The Quantity ", // Add placeholder text
+                                                        hintStyle: GoogleFonts.poppins(
+                                                          textStyle: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 12.sp,
+                                                            fontWeight: FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      )
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 94.w,top: 63.h),
+                                          child: Container(
+                                              width: 145.w,
+                                              height: 41.h,
+                                              decoration: BoxDecoration(
+                                                boxShadow: kElevationToShadow[4],
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  color: Colors.white),
+                                            child:Center(
+                                              child: Text(
+                                                "ok",
+                                                style:GoogleFonts.poppins (
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color:Color(0xffff3333),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
                                 ]
+                                    ),
                                   )
                                 ),
                               );

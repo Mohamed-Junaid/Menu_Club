@@ -32,5 +32,9 @@ class SelectTableModel {
     map['waiter'] = waiter;
     return map;
   }
-
+  static List<SelectTableModel> listFromJson(List<dynamic> json) {
+    return json == null
+        ? []
+        : json.map((value) => SelectTableModel.fromJson(value)).toList();
+  }
 }

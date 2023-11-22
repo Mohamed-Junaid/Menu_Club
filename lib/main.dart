@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:menu_club/bloc/allCategoriesBloc/all_categories_bloc.dart';
 import 'package:menu_club/bloc/login_Bloc/login_bloc.dart';
+import 'package:menu_club/bloc/productsBloc/products_bloc.dart';
+import 'package:menu_club/bloc/selectCustomerBloc/select_customer_bloc.dart';
+import 'package:menu_club/bloc/selectTableBloc/select_table_bloc.dart';
+import 'package:menu_club/repositories/modelClass/productsModel.dart';
 import 'Ui/loginPage.dart';
 
 
@@ -24,7 +29,11 @@ class MyApp extends StatelessWidget {
 
         providers: [
           BlocProvider(create: (context) => LoginBloc()),
-          BlocProvider(create: (context) => LoginBloc()),
+          BlocProvider(create: (context) => SelectTableBloc()),
+          BlocProvider(create: (context) => SelectCustomerBloc()),
+          BlocProvider(create: (context) => AllCategoriesBloc()),
+          BlocProvider(create: (context) => ProductsBloc()),
+
         ],
         child: MaterialApp(
               debugShowCheckedModeBanner: false,

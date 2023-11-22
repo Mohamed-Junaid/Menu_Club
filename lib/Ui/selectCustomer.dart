@@ -1,128 +1,145 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'CardWidget.dart';
+import 'package:menu_club/Ui/tabbars.dart';
+import 'package:menu_club/bloc/selectCustomerBloc/select_customer_bloc.dart';
+import 'package:menu_club/repositories/modelClass/selectCustomerModel.dart';
 import 'addCustomer.dart';
 import 'itemsTabBars.dart';
+
 class SelectCustomer extends StatefulWidget {
   const SelectCustomer({Key? key}) : super(key: key);
 
   @override
   State<SelectCustomer> createState() => _SelectCustomerState();
 }
-List <String> _list =['Tbl 1 vimal',"Tbl 2 vimal","Tbl 3 vimal",'Tbl 4 vimal',"Tbl 5 vimal"];
+
+late List<SelectCustomerModel> customerModel;
+TextEditingController number = TextEditingController();
 class _SelectCustomerState extends State<SelectCustomer> {
+
   bool isStrechedDropDown = false;
+
   void toggleDropDown() {
     setState(() {
       isStrechedDropDown = !isStrechedDropDown;
     });
   }
+
   dynamic groupValue;
   String title = "select customer";
+
+  void initState() {
+    BlocProvider.of<SelectCustomerBloc>(context).add(FetchSelectCustomer());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffff3333),
-      appBar: AppBar(
         backgroundColor: Color(0xffff3333),
-        leadingWidth: 150.w,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 22.w, top: 10.h),
-          child: Text(
-            "select Table",
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
-          ),
-        ),elevation: 0,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 20.w, bottom: 8.h),
-            child: GestureDetector(onTap: (){
-              Navigator.of(context).pop();
-            },
-
-              child: Image.asset(
-                'assets/Group 226.png',
-                height: 36.h,
-                width: 36.w,
+        appBar: AppBar(
+          backgroundColor: Color(0xffff3333),
+          leadingWidth: 150.w,
+          leading: Padding(
+            padding: EdgeInsets.only(left: 22.w, top: 10.h),
+            child: Text(
+              "select Customer",
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
-          )
-        ],
-      ),
-      body:SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 20.w, bottom: 8.h),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Image.asset(
+                  'assets/Group 226.png',
+                  height: 36.h,
+                  width: 36.w,
+                ),
+              ),
+            )
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                  padding: EdgeInsets.only(top: 103.h,left: 251.w),
+                  padding: EdgeInsets.only(top: 103.h, left: 251.w),
                   child: Column(
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (_)=>AddCustomer()));
+                          // Navigator.of(context).push(MaterialPageRoute(builder: (_) => AddCustomer()));
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (_) => Tabbars()));
                         },
                         child: Container(
                           width: 80.w,
                           height: 32.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.white),child:
-                        Padding(
-                          padding:  EdgeInsets.only(left: 6.w),
-                          child: Row(
-                            children: [
-                              Text(
-                                  "+",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w600,color: Color(0xffFF3C3C)
-
-                                  )
-                              ),SizedBox(width: 3.w,),
-                              Text(
-                                  "Add New",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13.sp,
-                                      fontWeight: FontWeight.w600,color: Color(0xffFF3C3C)
-                                  )
-                              )
-                            ],
+                              color: Colors.white),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 6.w),
+                            child: Row(
+                              children: [
+                                Text("+",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xffFF3C3C))),
+                                SizedBox(
+                                  width: 3.w,
+                                ),
+                                Text("Add New",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 13.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Color(0xffFF3C3C)))
+                              ],
+                            ),
                           ),
                         ),
-
-                        ),
                       ),
-
                     ],
-                  )
-              ),
-              Container(height: 391.h,
+                  )),
+              Container(
+                height: 391.h,
                 child: Column(
                   children: [
                     GestureDetector(
                       onTap: () {
                         setState(() {
-                          isStrechedDropDown =
-                          !isStrechedDropDown;
+                          isStrechedDropDown = !isStrechedDropDown;
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(top:46.h),
-                        child:Stack(
+                        padding: EdgeInsets.only(top: 46.h),
+                        child: Stack(
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(left: 30.w,top: 46.h),
+                                  padding:
+                                      EdgeInsets.only(left: 30.w, top: 46.h),
                                   child: AnimatedContainer(
-                                    duration: Duration(milliseconds: 300), // Animation duration
-                                    height: isStrechedDropDown ? 220.h : 0, // Adjust the height
+                                    duration: Duration(milliseconds: 300),
+                                    // Animation duration
+                                    height: isStrechedDropDown ? 220.h : 0,
+                                    // Adjust the height
                                     width: 311.w,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
@@ -130,27 +147,55 @@ class _SelectCustomerState extends State<SelectCustomer> {
                                           bottomRight: Radius.circular(10)),
                                       color: Colors.white,
                                     ),
-                                    child:  ListView.builder(
-                                      padding: EdgeInsets.only(top: 18.h),
-                                        itemExtent: 48.h,
-                                        shrinkWrap: true,
-                                        itemCount: _list.length,
-                                        itemBuilder: (context, index) {
-                                          return ListTile(
-                                            title: Center(child: Text(_list.elementAt(index),style:GoogleFonts.poppins(
-                                              textStyle: TextStyle(
-                                                color: Color(0xff606060),fontSize: 16.sp,
-                                                fontWeight: FontWeight.w400,
-                                              ),))),
-                                            onTap: () {
-                                              setState(() {
-                                                groupValue = index;
-                                                title = _list.elementAt(index);
-                                              });
-                                            },
-                                          );
-                                        }
-                                    ),
+                                    child: BlocBuilder<SelectCustomerBloc,
+                                            SelectCustomerState>(
+                                        builder: (context, state) {
+                                      if (state is SelectCustomerBlocLoading) {}
+                                      if (state is SelectCustomerBlocError) {
+                                        return Center(child: Text("Error"));
+                                      }
+
+                                      if (state is SelectCustomerBlocLoaded) {
+                                        customerModel =
+                                            BlocProvider.of<SelectCustomerBloc>(
+                                                    context)
+                                                .selectCustomerModel;
+                                        return ListView.builder(
+                                            padding: EdgeInsets.only(top: 18.h),
+                                            itemExtent: 48.h,
+                                            shrinkWrap: true,
+                                            itemCount: customerModel.length,
+                                            itemBuilder: (context, index) {
+                                              return ListTile(
+                                                title: Center(
+                                                    child: Text(
+                                                        customerModel[index]
+                                                            .name
+                                                            .toString(),
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          textStyle: TextStyle(
+                                                            color: Color(
+                                                                0xff606060),
+                                                            fontSize: 16.sp,
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                          ),
+                                                        ))),
+                                                onTap: () {
+                                                  setState(() {
+                                                    groupValue = index;
+                                                    title = customerModel[index]
+                                                        .name
+                                                        .toString(); isStrechedDropDown = false;
+                                                  });
+                                                },
+                                              );
+                                            });
+                                      } else {
+                                        return SizedBox();
+                                      }
+                                    }),
                                   ),
                                 ),
                               ],
@@ -159,7 +204,8 @@ class _SelectCustomerState extends State<SelectCustomer> {
                               child: Padding(
                                 padding: EdgeInsets.only(top: 16.h, left: 30.w),
                                 child: GestureDetector(
-                                  onTap: toggleDropDown, // Toggle the dropdown on tap
+                                  onTap: toggleDropDown,
+                                  // Toggle the dropdown on tap
                                   child: Container(
                                     width: 311.w,
                                     height: 47.h,
@@ -178,18 +224,22 @@ class _SelectCustomerState extends State<SelectCustomer> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Center(
-                                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 Center(
                                                   child: Text(
                                                     title,
                                                     style: TextStyle(
                                                       fontSize: 20.sp,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       color: Color(0xffff3333),
                                                     ),
                                                   ),
@@ -207,7 +257,8 @@ class _SelectCustomerState extends State<SelectCustomer> {
                                                   ),
                                                   child: Center(
                                                     child: Icon(
-                                                   Icons.arrow_forward_ios_rounded,
+                                                      Icons
+                                                          .arrow_forward_ios_rounded,
                                                       color: Color(0xffff3333),
                                                       size: 8.sp,
                                                     ),
@@ -227,9 +278,8 @@ class _SelectCustomerState extends State<SelectCustomer> {
                         ),
                       ),
                     ),
-
                     Padding(
-                      padding: EdgeInsets.only(top: 16.h,left: 30.w),
+                      padding: EdgeInsets.only(top: 16.h, left: 30.w),
                       child: Container(
                         width: 311.w,
                         height: 47.h,
@@ -249,22 +299,24 @@ class _SelectCustomerState extends State<SelectCustomer> {
                             ),
                             SizedBox(width: 9.w),
                             Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.only(bottom: 15.h),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  style: TextStyle(color: Colors.white),
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-                                    border: InputBorder.none, // Remove the border
-                                    fillColor: Color(0xffff3333),
-                                    hintText: "Number of Customers", // Add placeholder text
-                                    hintStyle: GoogleFonts.poppins(
-                                      textStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                              child: TextFormField(
+                                controller: number,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.number,
+                                style: TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(vertical: 10.0),
+                                  border: InputBorder.none,
+                                  // Remove the border
+                                  fillColor: Color(0xffff3333),
+                                  hintText: "Number of Customers",
+                                  // Add placeholder text
+                                  hintStyle: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -277,33 +329,43 @@ class _SelectCustomerState extends State<SelectCustomer> {
                   ],
                 ),
               ),
-
-              Padding(
-                  padding: EdgeInsets.only(top:70.h,left: 107.w, bottom: 55.h),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ItemsTabBars()));
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          boxShadow: kElevationToShadow[4],
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white),
-                      width: 145.w,
-                      height: 41.h,
-                      child: Center(
-                        child: Text("Continue",
-                            style: GoogleFonts.poppins(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xffFF0000))),
+              Builder(builder: (BuildContext context) {
+                return Padding(
+                    padding:
+                        EdgeInsets.only(top: 70.h, left: 107.w, bottom: 55.h),
+                    child: GestureDetector(
+                      onTap: () {
+                        // Check if both fields are selected before navigating
+                        if (title!="select customer" && number.text.isNotEmpty ) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => ItemsTabBars()));
+                        } else {
+                          // Show a message or handle the case where fields are not selected
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                'Please select Customer and Number of Customers.'),
+                          ));
+                        }
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            boxShadow: kElevationToShadow[4],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white),
+                        width: 145.w,
+                        height: 41.h,
+                        child: Center(
+                          child: Text("Continue",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xffFF0000))),
+                        ),
                       ),
-
-                    ),
-                  )
-              )
-            ]),
-      ),
-    );
+                    ));
+              })
+            ],
+          ),
+        ));
   }
 }

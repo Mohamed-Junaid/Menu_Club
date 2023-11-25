@@ -64,4 +64,21 @@ class MenuClubApi {
 
     return ProductsModel.listFromJson(jsonDecode(response.body));
   }
+
+  createCustomer(
+        String name,
+        String phone,
+        String place,
+      )async{
+    String trendingpath = '/appApi/customerApp/';
+    var body = {
+      "Name": name,
+      "Phone": phone,
+      "Place": place,
+      };
+    Response response = await multiFileApiClient.uploadFiles(
+      uploadPath: trendingpath,
+      bodyData: body, files: [], method: 'POST',
+    );
+  }
 }

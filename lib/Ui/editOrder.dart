@@ -30,10 +30,10 @@ class _EditOrderState extends State<EditOrder> {
               Padding(
                 padding: EdgeInsets.only(left: 22.w,),
                 child: Container(
-                  width: 88.w,
+                  width: 95.w,
                   height: 32.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       color: Colors.white),
                   child:
                 Padding(
@@ -63,7 +63,7 @@ class _EditOrderState extends State<EditOrder> {
                 ),
               ),
               SizedBox(height: 21.h,),
-              Container(height: 520.h,
+              Container(height: 510.h,
                 child: Expanded(
                   child:  ListView.builder(
                       itemExtent: 130.h,
@@ -180,7 +180,7 @@ class _EditOrderState extends State<EditOrder> {
     }),
                 ),
               ),Padding(
-       padding: EdgeInsets.only(top:25.h,left: 28.w),
+       padding: EdgeInsets.only(top:20.h,left: 28.w),
        child: Row(
          children: [
            Container(
@@ -210,19 +210,12 @@ class _EditOrderState extends State<EditOrder> {
                    color: Colors.white),
                width: 144.w,
                height: 42.h,
-               child: Row(
-                 children: [
-                   Padding(
-                     padding: EdgeInsets.only(
-                       left: 32.w,
-                     ),
-                     child: Text("Continue",
-                         style: GoogleFonts.poppins(
-                             fontSize: 20.sp,
-                             fontWeight: FontWeight.w600,
-                             color: Color(0xffFF0000))),
-                   ),
-                 ],
+               child: Center(
+                 child: Text("Continue",
+                     style: GoogleFonts.poppins(
+                         fontSize: 20.sp,
+                         fontWeight: FontWeight.w600,
+                         color: Color(0xffFF0000))),
                ),
 
              ),

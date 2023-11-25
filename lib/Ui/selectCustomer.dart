@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:menu_club/Ui/sampless.dart';
 import 'package:menu_club/Ui/tabbars.dart';
 import 'package:menu_club/bloc/selectCustomerBloc/select_customer_bloc.dart';
 import 'package:menu_club/repositories/modelClass/selectCustomerModel.dart';
+import '../bloc/allCategoriesBloc/all_categories_bloc.dart';
+import '../repositories/modelClass/allCategoriesModel.dart';
 import 'addCustomer.dart';
 import 'itemsTabBars.dart';
 
@@ -14,7 +17,7 @@ class SelectCustomer extends StatefulWidget {
   @override
   State<SelectCustomer> createState() => _SelectCustomerState();
 }
-
+late List<AllCategoriesModel> cat;
 late List<SelectCustomerModel> customerModel;
 TextEditingController number = TextEditingController();
 class _SelectCustomerState extends State<SelectCustomer> {
@@ -32,6 +35,9 @@ class _SelectCustomerState extends State<SelectCustomer> {
 
   void initState() {
     BlocProvider.of<SelectCustomerBloc>(context).add(FetchSelectCustomer());
+
+    BlocProvider.of<AllCategoriesBloc>(context).add(FetchAllCategories());
+    
     super.initState();
   }
 
@@ -41,7 +47,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
         backgroundColor: Color(0xffff3333),
         appBar: AppBar(
           backgroundColor: Color(0xffff3333),
-          leadingWidth: 150.w,
+          leadingWidth: 250.w,
           leading: Padding(
             padding: EdgeInsets.only(left: 22.w, top: 10.h),
             child: Text(
@@ -71,7 +77,17 @@ class _SelectCustomerState extends State<SelectCustomer> {
           ],
         ),
         body: SingleChildScrollView(
-          child: Column(
+          child: BlocListener<AllCategoriesBloc, AllCategoriesState>(
+  listener: (context, state) {
+
+    if (state is AllCategoriesBlocLoaded) {
+      cat = BlocProvider.of<AllCategoriesBloc>(context).allCategoriesModel;
+      print('Loaded');
+
+
+    }
+  },
+  child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -81,15 +97,14 @@ class _SelectCustomerState extends State<SelectCustomer> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // Navigator.of(context).push(MaterialPageRoute(builder: (_) => AddCustomer()));
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (_) => Tabbars()));
+                              MaterialPageRoute(builder: (_) => AddCustomer()));
                         },
                         child: Container(
-                          width: 80.w,
+                          width: 85.w,
                           height: 32.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                               color: Colors.white),
                           child: Padding(
                             padding: EdgeInsets.only(left: 6.w),
@@ -329,8 +344,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
                   ],
                 ),
               ),
-              Builder(builder: (BuildContext context) {
-                return Padding(
+             Padding(
                     padding:
                         EdgeInsets.only(top: 70.h, left: 107.w, bottom: 55.h),
                     child: GestureDetector(
@@ -338,7 +352,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
                         // Check if both fields are selected before navigating
                         if (title!="select customer" && number.text.isNotEmpty ) {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => ItemsTabBars()));
+                              builder: (_) => ItemsTabBars(cat: cat)));
                         } else {
                           // Show a message or handle the case where fields are not selected
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -362,10 +376,11 @@ class _SelectCustomerState extends State<SelectCustomer> {
                                   color: Color(0xffFF0000))),
                         ),
                       ),
-                    ));
-              })
+                    ))
+
             ],
           ),
+),
         ));
   }
 }

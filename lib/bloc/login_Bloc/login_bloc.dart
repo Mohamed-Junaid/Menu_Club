@@ -20,7 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         loginModel = await menuClubApi.getLogin(event.email,event.password)  ;
         emit(LoginBlocLoaded());
-      } catch(e){ ToastMessage().toastmessage(message:e.toString());
+      } catch(e){
+        ToastMessage().toastmessage(message:"Invalid Email or Password");
       print(e);
       emit(LoginBlocError());}
       // TODO: implement event handler

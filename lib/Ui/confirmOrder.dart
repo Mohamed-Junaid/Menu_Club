@@ -20,7 +20,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
         children: [SizedBox(height: 115.h,),
           Container(
               width: 300.w,
-              height: 374.h,
+              height: 400.h,
               decoration:     BoxDecoration(
                 boxShadow: kElevationToShadow[4],
                   borderRadius: BorderRadius.circular(20),
@@ -139,7 +139,7 @@ class _ConfirmOrderState extends State<ConfirmOrder> {
 
                         ],
                       ),
-                      SizedBox(height: 33.h,),
+                      SizedBox(height: 30.h,),
                       Row(
                         children: [
                           Text(

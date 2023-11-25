@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:menu_club/bloc/allCategoriesBloc/all_categories_bloc.dart';
 import 'package:menu_club/Ui/confirmOrder.dart';
 import 'package:menu_club/bloc/productsBloc/products_bloc.dart';
 import 'package:menu_club/repositories/modelClass/allCategoriesModel.dart';
@@ -10,7 +9,8 @@ import 'package:menu_club/repositories/modelClass/productsModel.dart';
 
 
 class ItemsTabBars extends StatefulWidget {
-  const ItemsTabBars({Key? key}) : super(key: key);
+  final List<AllCategoriesModel> cat;
+  const ItemsTabBars({Key? key,required this.cat}) : super(key: key);
 
   @override
   State<ItemsTabBars> createState() => _ItemsTabBarsState();
@@ -32,19 +32,23 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
   int current = 0;
   bool A = false;
 
-
+  PageController pageController = PageController();
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AllCategoriesBloc>(context).add(FetchAllCategories());
-    BlocProvider.of<AllCategoriesBloc>(context).stream.listen((state) {
-      if (state is AllCategoriesBlocLoaded) {
-        _tabController = TabController(length: categories.length, vsync: this);
-        _tabController.addListener(_handleTabSelection);
-        _pageController = PageController(initialPage: 0);
-      }
-    }
+    pageController.addListener(() {
+      setState(() {
+        current = pageController.page!.round();
+      });
+    });
+
+    _tabController = TabController(length: widget.cat.length, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+    _pageController = PageController(initialPage: 0);
+    BlocProvider.of<ProductsBloc>(context).add(FetchProducts(id: widget.cat[0].id.toString()),
     );
+
+    categories =widget.cat;
   }
 
   @override
@@ -67,7 +71,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
 
   void _fetchProductsForTabIndex(int index) {
     BlocProvider.of<ProductsBloc>(context).add(
-      FetchProducts(id: categories[index].id.toString()),
+      FetchProducts(id: widget.cat[index].id.toString()),
     );
 
   }
@@ -109,27 +113,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
             ],
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(30.h),
-              child: BlocBuilder<AllCategoriesBloc, AllCategoriesState>(
-                builder: (context, state) {
-                  if (state is AllCategoriesBlocLoading) {
-                    print("loading");
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  if (state is AllCategoriesBlocError) {
-                    return Center(child: Text("Error"));
-                  }
-
-                  if (state is AllCategoriesBlocLoaded) {
-                    categories = BlocProvider.of<AllCategoriesBloc>(context).allCategoriesModel;
-
-
-                    // print(categories.length);
-                    // _tabController = TabController(vsync: this, length: categories.length);
-                    // _tabController.addListener(_handleTabSelection);
-                    // _pageController = PageController(initialPage: 0);
-
-
-                    return TabBar(
+              child:  TabBar(
                       controller: _tabController,
                       isScrollable: true,
                       labelColor: Color(0xffff3333),
@@ -141,10 +125,10 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                         color: Colors.white,
                       ),
                       labelPadding: EdgeInsets.symmetric(horizontal: 5.w),
-                      tabs: categories.asMap().entries.map((MapEntry<int, AllCategoriesModel> entry) {
+                      tabs: widget.cat.asMap().entries.map((MapEntry<int, AllCategoriesModel> entry) {
                         return Container(
                           height: 33.h,
-                          width: 80.w,
+                          width: 83.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
                             border: Border.all(color: Colors.white, width: 1.w),
@@ -161,16 +145,11 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                           ),
                         );
                       }).toList(),
-                    );
-
-                  } else {
-                    return SizedBox();
-                  }
-                },
+                    )
               ),
             ),
           ),
-        ),
+
         body: Column(children: [
           Padding(
             padding: EdgeInsets.only(top: 10),
@@ -199,17 +178,17 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                       }
 
                       if (state is ProductsBlocLoaded) {
-                        items = BlocProvider.of<ProductsBloc>(context)
-                            .productsModel;
+                        items = BlocProvider.of<ProductsBloc>(context).productsModel;
 
-                        }
+
                         return PageView.builder(
                             controller: _pageController,
-                            onPageChanged: (index) {
-                              _tabController.animateTo(index);
+                            onPageChanged: (entry) {
+                              _tabController.animateTo(entry);
+                              print(entry);
 
                             },
-                            itemCount: categories.length,
+                            itemCount: widget.cat.length,
                             itemBuilder: (BuildContext context,index) {
                               return GridView.builder(
                                 itemCount: items.length,
@@ -635,7 +614,9 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                 },
                               );
                             },
-                        );
+                        );}else
+                        {return SizedBox();
+                        }
                       },
                   ),
                 ),

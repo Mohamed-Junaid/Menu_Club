@@ -338,7 +338,7 @@ class _SelectTableState extends State<SelectTable> {
                                                   padding:
                                                   EdgeInsets.only(
                                                       left: 101.w,
-                                                      bottom: 50.h),
+                                                      bottom: 30.h),
                                                   child: Container(
                                                     width: 145.w,
                                                     height: 41.h,
@@ -347,7 +347,7 @@ class _SelectTableState extends State<SelectTable> {
                                                       borderRadius:
                                                       BorderRadius
                                                           .circular(
-                                                          10),
+                                                          10.r),
                                                       border: Border.all(
                                                           color: Color(
                                                               0xffff3333)),
@@ -384,7 +384,7 @@ class _SelectTableState extends State<SelectTable> {
                                 height: 33.h,
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                  BorderRadius.circular(5),
+                                  BorderRadius.circular(5.r),
                                   color: Color(0xffff3333),
                                 ),
                                 child: Padding(

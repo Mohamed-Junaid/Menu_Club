@@ -2,14 +2,31 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-class EditOrder extends StatefulWidget {
-  const EditOrder({super.key});
+import 'package:menu_club/Ui/itemsTabBars.dart';
+import 'package:menu_club/Ui/selectCustomer.dart';
 
+import 'allOrders.dart';
+class EditOrder extends StatefulWidget {
+  final String  name;
+  final String  number;
+  final String  image;
+  final String  phone;
+  final String  quantity;
+  final List <String> itemName;
+  final List <String> itemQuantity;
+  final List <double> itemPrice;
+  const EditOrder({
+    Key? key, required this.name, required this.number, required this.image,
+    required this.quantity, required this.itemName, required this.itemQuantity, required this.itemPrice,
+    required this.phone
+
+  }) : super(key: key);
   @override
   State<EditOrder> createState() => _EditOrderState();
 }
 
 class _EditOrderState extends State<EditOrder> {
+
   @override
   Widget build(BuildContext context) {
      return Scaffold(
@@ -18,48 +35,81 @@ class _EditOrderState extends State<EditOrder> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top:20.h),
+                  child: Text(
+                      widget.name,
+                      style: GoogleFonts.poppins(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white
+                      )
+                  ),
+                ),
+              ),
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top:5.h),
+                  child: Text(
+                     'Table no.',
+                      style: GoogleFonts.poppins(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white
+                      )
+                  ),
+                ),
+              ),
         Padding(
-          padding:EdgeInsets.only(left: 22.w, top: 54.h),
+          padding:EdgeInsets.only(left: 22.w, top: 5.h),
           child: Text("Ordered Itmes",
               style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white)),
         ),
-              SizedBox(height: 36.h,),
+              SizedBox(height: 16.h,),
               Padding(
                 padding: EdgeInsets.only(left: 22.w,),
-                child: Container(
-                  width: 95.w,
-                  height: 32.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: Colors.white),
-                  child:
-                Padding(
-                  padding:  EdgeInsets.only(left: 6.w),
-                  child: Row(
-                    children: [
-                      Text(
-                          "+",
-                          style: GoogleFonts.poppins(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xffFF3C3C)
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ItemsTabBars(
+                        name: widget.name, cat: cat, number: widget.number, phone: widget.phone)));
+                  },
+                  child: Container(
+                    width: 95.w,
+                    height: 32.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: Colors.white),
+                    child:
+                  Padding(
+                    padding:  EdgeInsets.only(left: 6.w),
+                    child: Row(
+                      children: [
+                        Text(
+                            "+",
+                            style: GoogleFonts.poppins(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffFF3C3C)
 
-                          )
-                      ),SizedBox(width: 3.w,),
-                      Text(
-                          "Add Order",
-                          style: GoogleFonts.poppins(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xffFF3C3C)
-                          )
-                      )
-                    ],
+                            )
+                        ),SizedBox(width: 3.w,),
+                        Text(
+                            "Add items",
+                            style: GoogleFonts.poppins(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xffFF3C3C)
+                            )
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  ),
                 ),
               ),
               SizedBox(height: 21.h,),
@@ -67,7 +117,7 @@ class _EditOrderState extends State<EditOrder> {
                 child: Expanded(
                   child:  ListView.builder(
                       itemExtent: 130.h,
-                      itemCount: 10, // Number of items
+                      itemCount:  widget.itemName.length, // Number of items
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
@@ -82,67 +132,81 @@ class _EditOrderState extends State<EditOrder> {
                                 child: Row(mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      ClipRRect(borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          "assets/image 3 (1).png", fit: BoxFit.cover,
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          widget.image ?? '',
+                                          fit: BoxFit.cover,
                                           width: 100.w,
                                           height: 99.h,
+                                          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                            // If there's an error loading the image, display a fallback image
+                                            return Image.asset(
+                                              "assets/empty.png",
+                                              fit: BoxFit.cover,
+                                              width: 100.w,
+                                              height: 99.h,
+                                            );
+                                          },
                                         ),
                                       ),
 
-                                      Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 10.w, top: 10.h),
-                                            child: Text(
-                                                "chicken mandi",
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 16.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black
-                                                )
+                                      Container(
+                                        width:160.w,
+                                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(left: 10.w, top: 10.h),
+                                              child: Text(
+                                                  widget.itemName[index],
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 16.sp,
+                                                      fontWeight: FontWeight.w500,
+                                                      color: Colors.black
+                                                  )
+                                              ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 10.w, top: 2.h),
-                                            child: Text(
-                                                "Qatar",
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 16.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black
-                                                )
-                                            ),
-                                          ),
-                                          Padding(
+                                            Padding(
                                               padding: EdgeInsets.only(left: 10.w, top: 2.h),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  children: [
-                                                    TextSpan(
-                                                      text: "Quantity : ",
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 16.sp,
-                                                        fontWeight: FontWeight.w500,
-                                                        color: Color(0xff898989),
+                                              child: Text(
+                                                  widget.itemPrice[index].toString(),
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 16.sp,
+                                                      fontWeight: FontWeight.w600,
+                                                      color: Colors.black
+                                                  )
+                                              ),
+                                            ),
+                                            Padding(
+                                                padding: EdgeInsets.only(left: 10.w, top: 2.h),
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                        text: "Quantity : ",
+                                                        style: GoogleFonts.poppins(
+                                                          fontSize: 16.sp,
+                                                          fontWeight: FontWeight.w500,
+                                                          color: Color(0xff898989),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    TextSpan(
-                                                      text: "1",
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 16.sp,
-                                                        fontWeight: FontWeight.w500,
-                                                        color: Colors
-                                                            .black, // Change the color to your desired color
+                                                      TextSpan(
+                                                        text: widget.itemQuantity[index],
+                                                        style: GoogleFonts.poppins(
+                                                          fontSize: 16.sp,
+                                                          fontWeight: FontWeight.w500,
+                                                          color: Colors
+                                                              .black, // Change the color to your desired color
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
+                                                    ],
+                                                  ),
+                                                )
 
-                                          ),
-                                        ],
-                                      ), SizedBox(width: 27.w,),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                       DottedLine(
                                         direction: Axis.vertical,
                                         alignment: WrapAlignment.center,
@@ -156,7 +220,7 @@ class _EditOrderState extends State<EditOrder> {
                                         dashGapRadius: 0.0,),
 
                                       Padding(
-                                        padding: EdgeInsets.only(left: 25.w, top: 10.h),
+                                        padding: EdgeInsets.only(left: 15.w, top: 13.h),
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
@@ -201,7 +265,7 @@ class _EditOrderState extends State<EditOrder> {
            ),SizedBox(width: 54.w,),
            GestureDetector(
              onTap: () {
-
+               Navigator.of(context).push(MaterialPageRoute(builder: (_)=> AllOrders()));
              },
              child: Container(
                decoration: BoxDecoration(

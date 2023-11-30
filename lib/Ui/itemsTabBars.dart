@@ -2,16 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:menu_club/Ui/confirmOrder.dart';
+import 'package:menu_club/Ui/toast_message.dart';
 import 'package:menu_club/bloc/productsBloc/products_bloc.dart';
 import 'package:menu_club/repositories/modelClass/allCategoriesModel.dart';
 import 'package:menu_club/repositories/modelClass/productsModel.dart';
 
+import 'editOrder.dart';
+
 
 class ItemsTabBars extends StatefulWidget {
-  final List<AllCategoriesModel> cat;
-  const ItemsTabBars({Key? key,required this.cat}) : super(key: key);
+ final String  name;
+ final String  number;
+ final String  phone;
+  const ItemsTabBars({
+    Key? key, required this.name, required this.cat, required this.number, required this.phone
 
+  }) : super(key: key);
+
+  final List<AllCategoriesModel> cat;
   @override
   State<ItemsTabBars> createState() => _ItemsTabBarsState();
 }
@@ -31,8 +39,11 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
   List<Widget> myTabsContent = [];
   int current = 0;
   bool A = false;
+  String name='';
+  String image='';
 
   PageController pageController = PageController();
+  TextEditingController quantity =TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -55,6 +66,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
   void dispose() {
     _tabController.dispose();
     _pageController.dispose();
+
     super.dispose();
   }
 
@@ -75,6 +87,17 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
     );
 
   }
+
+  List <String> itemName = [];
+  List <String> itemQuantity = [];
+  List <double> itemPrice = [];
+
+
+  int selectedItemIndex = 0;
+  int ProductquantityIndex = 0;
+  int ProductpriceIndex = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,6 +204,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                         items = BlocProvider.of<ProductsBloc>(context).productsModel;
 
 
+
                         return PageView.builder(
                             controller: _pageController,
                             onPageChanged: (entry) {
@@ -218,7 +242,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                 fit: BoxFit.cover,
                                               )
                                                   : Image.network(
-                                                items[index].products!.image.toString(),
+                                               image= items[index].products!.image.toString(),
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (context, error, stackTrace) {
                                                   // Handle errors that occur during image loading
@@ -230,8 +254,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                 },
                                               ),
                                             ],
-                                          )
-                                          ,
+                                          ),
                                           GestureDetector(
                                             onTap: () {
                                               showModalBottomSheet(
@@ -279,12 +302,24 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                                   .start,
                                                               children: [
                                                                 Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                      left: 20
-                                                                          .w,
-                                                                      top: 40
-                                                                          .h),
+                                                                  padding:  EdgeInsets
+                                                                      .only(top: 10.h),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                    name = items[index].products!.name.toString(),
+                                                                      style: GoogleFonts.playfairDisplay(
+                                                                          fontSize:
+                                                                          22.sp,
+                                                                          fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
+                                                                          color: Colors
+                                                                              .white),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets.only(left: 20.w, top: 10.h),
                                                                   child: Text(
                                                                     "Enter The Quantity",
                                                                     style: GoogleFonts.poppins(
@@ -299,10 +334,8 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                                 ),
                                                                 Padding(
                                                                     padding: EdgeInsets.only(
-                                                                        left:
-                                                                        47.w,
-                                                                        top:
-                                                                        20.h),
+                                                                        left: 47.w,
+                                                                        top: 20.h),
                                                                     child: Row(
                                                                       children: [
                                                                         InkWell(
@@ -325,7 +358,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                                             decoration:
                                                                             BoxDecoration(
                                                                               borderRadius:
-                                                                              BorderRadius.circular(5),
+                                                                              BorderRadius.circular(5.r),
                                                                               color: selectedContainer == "Q"
                                                                                   ? Colors.black
                                                                                   : Colors.white,
@@ -483,8 +516,9 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                                                   A = false;
                                                                                 });
                                                                               },
-                                                                              textInputAction:
-                                                                              TextInputAction.done,
+                                                                              controller: quantity,
+                                                                              keyboardType: TextInputType.number,
+                                                                              textInputAction: TextInputAction.done,
                                                                               style:
                                                                               TextStyle(color: Colors.white),
                                                                               decoration:
@@ -516,29 +550,50 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                                                                       top: 63
                                                                           .h),
                                                                   child:
-                                                                  Container(
-                                                                    width: 145.w,
-                                                                    height: 41.h,
-                                                                    decoration: BoxDecoration(
-                                                                        boxShadow:
-                                                                        kElevationToShadow[
-                                                                        4],
-                                                                        borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                        color: Colors
-                                                                            .white),
-                                                                    child: Center(
-                                                                      child: Text(
-                                                                        "ok",
-                                                                        style: GoogleFonts
-                                                                            .poppins(
-                                                                          fontSize:
-                                                                          20.sp,
-                                                                          fontWeight:
-                                                                          FontWeight.w600,
-                                                                          color: Color(
-                                                                              0xffff3333),
+                                                                  GestureDetector(onTap: () {
+                                                                    if (quantity.text.isNotEmpty && selectedContainer.isNotEmpty) {
+                                                                     itemName.add(
+                                                                          items[index]
+                                                                              .products!.name
+                                                                              .toString());
+                                                                      itemQuantity.add(
+                                                                          quantity.text);
+                                                                      itemPrice.add(
+                                                                          double.parse(
+                                                                              items[index]
+                                                                                  .sellingAmount
+                                                                                  .toString())*double.parse(quantity.text.toString()));
+                                                                      Navigator.of(context).pop();
+                                                                    } else {
+                                                                      ToastMessage().toastmessage(
+                                                                          message:
+                                                                          "Select your quantity");
+                                                                    }
+                                                                  },
+                                                                    child: Container(
+                                                                      width: 145.w,
+                                                                      height: 41.h,
+                                                                      decoration: BoxDecoration(
+                                                                          boxShadow:
+                                                                          kElevationToShadow[
+                                                                          4],
+                                                                          borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10.r),
+                                                                          color: Colors
+                                                                              .white),
+                                                                      child: Center(
+                                                                        child: Text(
+                                                                          "ok",
+                                                                          style: GoogleFonts
+                                                                              .poppins(
+                                                                            fontSize:
+                                                                            20.sp,
+                                                                            fontWeight:
+                                                                            FontWeight.w600,
+                                                                            color: Color(
+                                                                                0xffff3333),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -647,9 +702,10 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => ConfirmOrder()));
-                  },
+
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_)=> EditOrder(name: widget.name, number: widget.number, image: image,
+                          quantity: quantity.text, itemName: itemName, itemQuantity: itemQuantity, itemPrice: itemPrice, phone: widget.phone,)));
+                    },
                   child: Container(
                     decoration: BoxDecoration(
                         boxShadow: kElevationToShadow[4],
@@ -676,6 +732,8 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
               ],
             ),
           )
-        ]));
+        ])
+    );
   }
+
 }

@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:menu_club/repositories/menuClubApi/single_file_api_client.dart';
 import 'package:menu_club/repositories/modelClass/SelectTableModel.dart';
 
+import '../modelClass/allBillsModel.dart';
 import '../modelClass/allCategoriesModel.dart';
 import '../modelClass/loginModel.dart';
 import '../modelClass/productsModel.dart';
@@ -72,13 +73,20 @@ class MenuClubApi {
       )async{
     String trendingpath = '/appApi/customerApp/';
     var body = {
-      "Name": name,
-      "Phone": phone,
-      "Place": place,
+      "name": name,
+      "phone": phone,
+      "place": place,
       };
     Response response = await multiFileApiClient.uploadFiles(
       uploadPath: trendingpath,
       bodyData: body, files: [], method: 'POST',
     );
+  }
+  Future<List<AllBillsModel>> getAllBills() async {
+    String trendingpath = '/appApi/billAppApi/';
+    var body = {};
+    Response response = await apiClient.invokeAPI(trendingpath, 'GET', body);
+
+    return AllBillsModel.listFromJson(jsonDecode(response.body));
   }
 }

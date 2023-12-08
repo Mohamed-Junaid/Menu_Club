@@ -14,8 +14,9 @@ class ItemsTabBars extends StatefulWidget {
  final String  name;
  final String  number;
  final String  phone;
+ final String  tableNo;
   const ItemsTabBars({
-    Key? key, required this.name, required this.cat, required this.number, required this.phone
+    Key? key, required this.name, required this.cat, required this.number, required this.phone, required this.tableNo
 
   }) : super(key: key);
 
@@ -705,7 +706,7 @@ class _ItemsTabBarsState extends State<ItemsTabBars>
                   onTap: () {
 
                         Navigator.of(context).push(MaterialPageRoute(builder: (_)=> EditOrder(name: widget.name, number: widget.number, image: image,
-                          quantity: quantity.text, itemName: itemName, itemQuantity: itemQuantity, itemPrice: itemPrice, phone: widget.phone,)));
+                          quantity: quantity.text, itemName: itemName, itemQuantity: itemQuantity, itemPrice: itemPrice, phone: widget.phone, tableNo: widget.tableNo,)));
                     },
                   child: Container(
                     decoration: BoxDecoration(

@@ -19,8 +19,10 @@ class _SelectTableState extends State<SelectTable> {
   bool isExpanded = false;
   bool isSelected = false;
   bool isTapped = false;
+  String selectedTableNo = '';
+  bool isAnyTapped = false;
   dynamic groupValue;
-  List<bool> isTappedList = List.generate(8, (_) => false);
+  List<bool> isTappedList = List.generate(tableModel.length, (_) => false);
   void initState() {
     BlocProvider.of<SelectTableBloc>(context).add(FetchSelctTable());
     super.initState();
@@ -67,15 +69,22 @@ class _SelectTableState extends State<SelectTable> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isTappedList[index] = !isTappedList[
-                    index]; // Toggle the tapped state for the specific container
+                    // Deselect all containers
+                    for (int i = 0; i < isTappedList.length; i++) {
+                      isTappedList[i] = false;
+                    }
+
+                    // Toggle the selected container
+                    isTappedList[index] = true;
+                    isAnyTapped = true; // Set flag for any container tapped
+                    selectedTableNo = tableModel[index].tableNo.toString();
                   });
                 },
-                child: Container(
+    child: Container(
                   width: 151.w,
                   height: 91.h,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                     color: isTappedList[index]
                         ? Colors.black
                         : Colors.white, // Check if it's tapped
@@ -432,8 +441,13 @@ class _SelectTableState extends State<SelectTable> {
             padding: EdgeInsets.only(left: 107.w, bottom: 55.h),
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => SelectCustomer()));
+                if (selectedTableNo.isNotEmpty) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => SelectCustomer(tableNo: selectedTableNo),
+                    ),
+                  );
+                }
               },
               child: Container(
                   width: 145.w,

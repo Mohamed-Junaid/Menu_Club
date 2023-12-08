@@ -6,19 +6,21 @@ import 'package:menu_club/Ui/itemsTabBars.dart';
 import 'package:menu_club/Ui/selectCustomer.dart';
 
 import 'allOrders.dart';
+import 'confirmOrder.dart';
 class EditOrder extends StatefulWidget {
   final String  name;
   final String  number;
   final String  image;
   final String  phone;
   final String  quantity;
+  final String tableNo;
   final List <String> itemName;
   final List <String> itemQuantity;
   final List <double> itemPrice;
   const EditOrder({
     Key? key, required this.name, required this.number, required this.image,
     required this.quantity, required this.itemName, required this.itemQuantity, required this.itemPrice,
-    required this.phone
+    required this.phone, required this.tableNo
 
   }) : super(key: key);
   @override
@@ -53,7 +55,7 @@ class _EditOrderState extends State<EditOrder> {
                 child: Padding(
                   padding: EdgeInsets.only(top:5.h),
                   child: Text(
-                     'Table no.',
+                     'Table no. ${widget.tableNo}',
                       style: GoogleFonts.poppins(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -76,7 +78,7 @@ class _EditOrderState extends State<EditOrder> {
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (_)=> ItemsTabBars(
-                        name: widget.name, cat: cat, number: widget.number, phone: widget.phone)));
+                        name: widget.name, cat: cat, number: widget.number, phone: widget.phone, tableNo: widget.tableNo,)));
                   },
                   child: Container(
                     width: 95.w,
@@ -247,19 +249,24 @@ class _EditOrderState extends State<EditOrder> {
        padding: EdgeInsets.only(top:20.h,left: 28.w),
        child: Row(
          children: [
-           Container(
-             width: 117.w,
-             height: 42.h,
-             decoration: BoxDecoration(
-                 color: Color(0xffff3333),border: Border.all(color: Colors.white),
-                 borderRadius: BorderRadius.circular(10)),
-             child: Center(
-               child: Text(
-                   "Save",
-                   style: GoogleFonts.poppins(
-                       fontSize: 20.sp,
-                       fontWeight: FontWeight.w500,color: Colors.white
-                   )
+           GestureDetector(
+             onTap: () {
+
+             },
+             child: Container(
+               width: 117.w,
+               height: 42.h,
+               decoration: BoxDecoration(
+                   color: Color(0xffff3333),border: Border.all(color: Colors.white),
+                   borderRadius: BorderRadius.circular(10)),
+               child: Center(
+                 child: Text(
+                     "Save",
+                     style: GoogleFonts.poppins(
+                         fontSize: 20.sp,
+                         fontWeight: FontWeight.w500,color: Colors.white
+                     )
+                 ),
                ),
              ),
            ),SizedBox(width: 54.w,),

@@ -10,8 +10,14 @@ import '../repositories/modelClass/allCategoriesModel.dart';
 import 'addCustomer.dart';
 import 'itemsTabBars.dart';
 
+
 class SelectCustomer extends StatefulWidget {
-  const SelectCustomer({Key? key}) : super(key: key);
+  final String tableNo;
+
+  const SelectCustomer({
+    Key? key, required this.tableNo,
+
+  }) : super(key: key);
 
   @override
   State<SelectCustomer> createState() => _SelectCustomerState();
@@ -138,6 +144,11 @@ class _SelectCustomerState extends State<SelectCustomer> {
                             ),
                           ),
                         ),
+                        // Text(widget.tableNo,
+                        //     style: GoogleFonts.poppins(
+                        //         fontSize: 13.sp,
+                        //         fontWeight: FontWeight.w600,
+                        //         color: Colors.white))
                       ],
                     )),
                 Container(
@@ -365,7 +376,7 @@ class _SelectCustomerState extends State<SelectCustomer> {
                           if (title!="select customer" && number.text.isNotEmpty ) {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => ItemsTabBars(cat: cat, name: title, number: number.text,
-                                  phone: customerModel[groupValue].phone.toString(), )));
+                                  phone: customerModel[groupValue].phone.toString(), tableNo: widget.tableNo, )));
                           } else {
                             // Show a message or handle the case where fields are not selected
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

@@ -385,7 +385,7 @@ class _AddCustomerState extends State<AddCustomer> {
         Navigator.of(context).pop();
 
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => SelectCustomer()));
+            MaterialPageRoute(builder: (_) => SelectCustomer(tableNo: '',)));
       }
 
       if (state is CreateCustomerBlocError) {

@@ -17,12 +17,10 @@ class _SelectTableState extends State<SelectTable> {
   String selectOption = 'Status';
   List<String> opt = ['Free', 'Preparing', 'Eating', 'Finished'];
   bool isExpanded = false;
-  bool isSelected = false;
-  bool isTapped = false;
   String selectedTableNo = '';
   bool isAnyTapped = false;
   dynamic groupValue;
-  List<bool> isTappedList = List.generate(tableModel.length, (_) => false);
+  int selectedIndex=-1;
   void initState() {
     BlocProvider.of<SelectTableBloc>(context).add(FetchSelctTable());
     super.initState();
@@ -55,6 +53,7 @@ class _SelectTableState extends State<SelectTable> {
     if (state is SelectTableBlocLoaded) {
       tableModel =
           BlocProvider.of<SelectTableBloc>(context).selectTableModel;
+
       return GridView.builder(
         itemCount:tableModel.length,
         shrinkWrap: false,
@@ -69,15 +68,7 @@ class _SelectTableState extends State<SelectTable> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    // Deselect all containers
-                    for (int i = 0; i < isTappedList.length; i++) {
-                      isTappedList[i] = false;
-                    }
-
-                    // Toggle the selected container
-                    isTappedList[index] = true;
-                    isAnyTapped = true; // Set flag for any container tapped
-                    selectedTableNo = tableModel[index].tableNo.toString();
+                    selectedIndex=index;
                   });
                 },
     child: Container(
@@ -85,7 +76,7 @@ class _SelectTableState extends State<SelectTable> {
                   height: 91.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.r),
-                    color: isTappedList[index]
+                    color: selectedIndex==index
                         ? Colors.black
                         : Colors.white, // Check if it's tapped
                   ),
@@ -99,7 +90,7 @@ class _SelectTableState extends State<SelectTable> {
                           style: GoogleFonts.poppins(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
-                            color: isTappedList[index]
+                            color: selectedIndex==index
                                 ? Colors.white
                                 : Colors.black, // Change text color
                           ),
